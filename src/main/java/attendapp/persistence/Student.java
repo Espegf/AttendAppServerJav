@@ -26,7 +26,7 @@ public class Student {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "mac")
+    @Column(name = "mac", unique = true)
     private String mac;
 
     public Student(String name, String surname, String mac) {

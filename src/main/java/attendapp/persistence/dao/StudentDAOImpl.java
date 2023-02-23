@@ -3,6 +3,7 @@ package attendapp.persistence.dao;
 import attendapp.persistence.Student;
 import attendapp.persistence.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Optional;
 
@@ -15,13 +16,11 @@ public class StudentDAOImpl extends GenericDAOImpl<Student> implements StudentDA
     }
 
     @Override
-    public boolean findByMac(String mac) {
+    public Student findByMac(String mac) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            if(session.find(Student.class, mac)!=null){
-                return true;
-            }else{
-                return false;
-            }
+            Query<Student> query = session.createQuery("FROM Student WHERE mac = :mac", Student.class);
+            query.setParameter("mac", mac);
+            return query.uniqueResult();
         }
     }
 

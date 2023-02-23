@@ -1,4 +1,5 @@
 
+import attendapp.persistence.AddService;
 import attendapp.persistence.Arrivals;
 import attendapp.persistence.Student;
 import attendapp.persistence.util.HibernateUtil;
@@ -10,9 +11,7 @@ import org.hibernate.Session;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +74,10 @@ public class Server {
         String name = datos[0];
         String surname = datos[1];
         String mac = datos[2];
-        LocalDateTime time = LocalDateTime.now();
+        String place = datos[3];
+        LocalDateTime date = LocalDateTime.now();
+        AddService add = new AddService();
+        add.addStudent(name,surname,mac,place,date);
 
         // System.out.println(name + " " + surname + " " + mac);
     }

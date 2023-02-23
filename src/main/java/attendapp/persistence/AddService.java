@@ -1,7 +1,9 @@
 package attendapp.persistence;
 
 import attendapp.persistence.dao.GenericDAO;
+import attendapp.persistence.dao.GenericDAOImpl;
 import attendapp.persistence.dao.StudentDAO;
+import attendapp.persistence.dao.StudentDAOImpl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -14,20 +16,20 @@ public class AddService {
     private final StudentDAO studentDAO;
     private final GenericDAO<Arrivals> arrivalsGenericDAO;
 
-    public AddService(GenericDAO<Student> genericDAO, StudentDAO studentDAO, GenericDAO<Arrivals> arrivalsGenericDAO) {
-        this.genericDAO = genericDAO;
-        this.studentDAO = studentDAO;
-        this.arrivalsGenericDAO = arrivalsGenericDAO;
+    public AddService() {
+        this.genericDAO = new GenericDAOImpl<>(Student.class);
+        this.studentDAO = new StudentDAOImpl();
+        this.arrivalsGenericDAO = new GenericDAOImpl<>(Arrivals.class);
     }
 
     public void addStudent(String name, String surname, String mac, String place ,LocalDateTime fecha){
-        if (studentDAO.findByMac(mac)){
-            Student s = studentDAO.findByMacToStudent(mac);
+        Student s = studentDAO.findByMac(mac);
+        if (s!=null){
             addArrival(s,fecha, place);
         }else{
-            Student s = new Student(name, surname,mac);
+            s = new Student(name, surname,mac);
             genericDAO.create(s);
-            Student st = studentDAO.findByMacToStudent(mac);
+            Student st = studentDAO.findByMac(mac);
             addArrival(st,fecha, place);
         }
     }

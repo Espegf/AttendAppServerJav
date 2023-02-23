@@ -7,6 +7,6 @@ import attendapp.persistence.Student;
  */
 public interface StudentDAO {
 
-    public boolean findByMac(String mac);
-    public Student findByMacToStudent(String mac);
+    Student findByMac(String mac);
+    Student findByMacToStudent(String mac);
 }
