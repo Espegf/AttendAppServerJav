@@ -29,6 +29,12 @@ public class Student {
     @Column(name = "mac")
     private String mac;
 
+    public Student(String name, String surname, String mac) {
+        this.name = name;
+        this.surname = surname;
+        this.mac = mac;
+    }
+
     @Override
     public String toString() {
         return "Student{" +

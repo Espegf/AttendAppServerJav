@@ -63,14 +63,21 @@ public class Server {
     //Recibir de un cliente concreto
     private static void receive(Client soc) throws IOException {
         while (!soc.getSocket().isClosed()) {
-
-           System.out.println(soc.receiveMessage());
-            //save(soc.receiveMessage());
+            String msj = soc.receiveMessage();
+            System.out.println();
+            closeClient(soc);
+            save(msj);
 
         }
     }
     public static void save(String dat){
+        String[] datos = dat.split(",");
+        String name = datos[0];
+        String surname = datos[1];
+        String mac = datos[2];
+        LocalDateTime time = LocalDateTime.now();
 
+        // System.out.println(name + " " + surname + " " + mac);
     }
 
     public static void closeClient(Client soc) throws IOException {

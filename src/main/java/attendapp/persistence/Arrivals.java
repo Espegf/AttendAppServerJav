@@ -32,6 +32,12 @@ public class Arrivals {
     @ManyToOne
     private Student student;
 
+    public Arrivals(Timestamp date, String place, Student student) {
+        this.date = date;
+        this.place = place;
+        this.student = student;
+    }
+
     @Override
     public String toString() {
         return "Lugar: " + place + "Estudiante" + student.getName() + " " + student.getSurname() + " " + student.getMac() + " ";

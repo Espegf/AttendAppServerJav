@@ -31,17 +31,19 @@ public class Client {
     }
 
     public String receiveMessage() throws IOException {
-       /* INPUT.readUTF();
-        InputStreamReader ir = new InputStreamReader(INPUT);
-        StringBuilder msj = new StringBuilder();
-        String line = "";
-        while ((line = ir.) != null) {
-            msj.append(line);
-            msj.append(System.lineSeparator());
-        }
+        InputStreamReader inputStreamReader = new InputStreamReader(INPUT, "UTF-8");
 
-        */
-        return INPUT.readUTF();
+// Leer los caracteres enviados desde el cliente y guardarlos en un StringBuilder
+        StringBuilder stringBuilder = new StringBuilder();
+        int c;
+        while ((c = inputStreamReader.read()) != -1) {
+            stringBuilder.append((char)c);
+        }
+        String data = stringBuilder.toString();
+
+// Imprimir los datos recibidos desde el cliente
+        System.out.println("Data received from client: " + data);
+        return data;
     }
 
 
